@@ -34,4 +34,4 @@ class Main {
             isabel.crecer(4.5);
             isabel.cumpliranyos(); // si no se inicializa se toma por defecto isabel.edat=0.
       }  
-}
+} 
