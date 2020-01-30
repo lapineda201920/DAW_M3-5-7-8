@@ -1,48 +1,50 @@
 package com.exercici04;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
 
-    // ATRIBUTS
-    public static String numero01 = "";
-    public static String numero02 = "";
-
-
-    // MÈTODES
-    public static void divisio (float num01, float num02) throws NumberFormatException,ArithmeticException{
-
-        // 3 - ENS DIU EL RESULTAT DE LA DIVISÓ I ENS LA IMPRIMEIX
-        float resultat = 0;
-        resultat = num01 / num02;
-        System.out.println("Numero 1 / Numero 2 = "+resultat);
-    }
-
     public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in);
 
-        // 1 - DEMANEM LA INFORMACIÓ
-        System.out.println("DEMANAR INFORMACIÓ\n");
+        // ATRIBUTS
+        int numeroAdivinar = (int) (Math.random() * 500);
+        int numero = 0;
+        int intentos = 0;
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("\nNúmero 1: ");
-        numero01 = sc.next();
-        System.out.println("\nNúmero 2: ");
-        numero02 = sc.next();
 
-        try {
+        // MÈTODES
+        do {
+            boolean leido;
+            do {
+                System.out.println("Introduzca un numero (1-500)");
+                try {
+                    intentos++;
+                    numero = teclado.nextInt();
+                    System.out.println("El numero introducido es: " + numero);
+                    leido = true;
+                } catch (InputMismatchException ex) {
+                    System.out.println("No ha introducido un numero entero");
+                    teclado.next(); // se lee el elemento no reconocido para
+                    // eliminarlo
+                    leido = false;
+                }
+            } while (leido == false);
 
-            // 2 - CONVERTIM ELS STRINGS A FLOATS I CRIDEM AL MÈTODE DIVISIÓ
-            float num01 = Float.parseFloat(numero01);
-            float num02 = Float.parseFloat(numero02);
-            divisio(num01,num02);
-        }
-        catch (NumberFormatException ex){
+            if (numero > numeroAdivinar) {
+                System.out.println("El numero es menor. Sigue intentando");
 
-            System.out.println("\n\nS'han introduït caràcters no numèrics!");
-        }
-        catch (ArithmeticException ex){
+            }
+            if (numero < numeroAdivinar) {
+                System.out.println("El numero es mayor. Sigue intentandolo");
+            }
 
-            System.out.println("\n\nS'ha dividit entre zero!");
-        }
+        } while (numero != numeroAdivinar);
+
+        System.out.println("Enhorabuena. Has acertado, ya que el numero es: " + numeroAdivinar);
+        System.out.println("Lo has conseguido tras todos estos intentos: " + intentos);
+
     }
+
 }
