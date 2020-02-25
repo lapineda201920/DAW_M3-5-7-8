@@ -1,0 +1,5 @@
+Fitxer de Text
+Línia01
+Línia02
+Línia03
+Línia04
